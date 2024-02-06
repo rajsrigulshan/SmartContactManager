@@ -8,7 +8,11 @@
 <body>
 
     <section style="padding: 10px;">
-        <h1>This is about page</h1>
+      <p>session object</p>
+      <div th:if="${session.message}" th:classappend="${session.message.msgType}" class="alert" role="alert">
+        <p th:text="${session.message.content}"></p>
+      </div>
+      
     </section>
     
 </body>

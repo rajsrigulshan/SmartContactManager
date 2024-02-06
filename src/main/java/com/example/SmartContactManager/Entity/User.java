@@ -3,6 +3,7 @@ package com.example.SmartContactManager.Entity;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
@@ -13,6 +14,12 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+
 
 @Entity
 @Table(name="user_tbl")
@@ -22,9 +29,17 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_Id")
     private Long    id;
+
+    @NotBlank(message = "can't be null")
+    // @Min(value = 3,message = "should be greater than 3")
+    // @Max(value = 20,message = "should be less than 20 ")
+    @Size(min=3,max=25,message="character must be in the 3 to 25 ")
     private String  name;
+
+    @Pattern(regexp ="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$",message="Invalid Email!")
     @Column(unique = true)
     private String  email;
+    @Size(min=6,message = "minimum 6 required")
     private String  password;
     private String  role;
     private boolean enabled;
