@@ -1,6 +1,7 @@
-package com.example.SmartContactManager.Service;
+package com.example.SmartContactManager.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,12 +25,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
-public class HomeService {
+public class HomeController {
 
     
 
     @Autowired
     private UserRepo userRepo;
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
     
     @RequestMapping("/")
     public String home(Model model) {
@@ -50,6 +53,9 @@ public class HomeService {
         
         return "signup";
     }
+    
+    
+   
 
 
     @RequestMapping(value="/doRegister", method=RequestMethod.POST)
@@ -71,10 +77,12 @@ public class HomeService {
             }
 
             user.setEnabled(true);
-            user.setRole("Test_Usr");
+            user.setRole("ROLE_ADMIN");
             user.setImageUrl("defalut.png");
             System.out.println("Agreemnt: " +agreement);
             System.out.println("User: "+ user);
+            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+            
             userRepo.save(user);
             session.setAttribute("message",new Message("Register Successful", "alert-success"));
 
@@ -85,7 +93,12 @@ public class HomeService {
             String msg= e.getMessage();
             model.addAttribute("user",user);
             if(msg!=null)
-                session.setAttribute("message",new Message(msg, "alert-danger"));
+                {
+                    if(msg.contains("duplicate key"))
+                     session.setAttribute("message",new Message("User already exists", "alert-success"));
+                    else
+                     session.setAttribute("message",new Message(msg, "alert-danger"));
+                }
             else
                 session.setAttribute("message",new Message("Something went wrong","alert-danger"));
                 return "signup";

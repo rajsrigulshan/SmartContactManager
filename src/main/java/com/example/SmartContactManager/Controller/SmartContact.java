@@ -1,4 +1,4 @@
-package com.example.SmartContactManager.Service;
+package com.example.SmartContactManager.Controller;
 
 import java.util.Optional;
 
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @Controller
-public class UserService {
+public class SmartContact {
       
     @Autowired
     private UserRepo userRepo;
