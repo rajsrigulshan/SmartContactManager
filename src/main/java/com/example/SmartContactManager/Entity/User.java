@@ -14,8 +14,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -31,8 +29,6 @@ public class User {
     private Long    id;
 
     @NotBlank(message = "can't be null")
-    // @Min(value = 3,message = "should be greater than 3")
-    // @Max(value = 20,message = "should be less than 20 ")
     @Size(min=3,max=25,message="character must be in the 3 to 25 ")
     private String  name;
 

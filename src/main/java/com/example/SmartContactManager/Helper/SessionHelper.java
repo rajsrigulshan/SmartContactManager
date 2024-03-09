@@ -10,10 +10,10 @@ import jakarta.servlet.http.HttpSession;
 @Component
 public class SessionHelper {
 
-   public void removeSessionAttribute() {
+   public void removeSessionAttribute(String msg) {
     System.out.println("removeSession triggered................");
     HttpSession session=((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest().getSession();
-    session.removeAttribute("message");
+    session.removeAttribute(msg);
    
 }
  
