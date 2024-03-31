@@ -13,8 +13,33 @@
   <link rel="stylesheet" th:href="@{/css/style.css}" />
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <script th:src="@{/js/script.js}"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+  <script>
+    function onDelete(id) {
+      event.preventDefault();
+        swal({
+          title: "Are you sure?",
+          text: "Want to delete this contact",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        })
+          .then((willDelete) => {
+            if (willDelete) {
+              console.log("id---------"+id);
+              window.location="/user/removeContact/"+id;
+              return true;
+            } else {
+              swal("Your Contact is safe!!!");
+              return false;
+            }
+          });
+      }
+
+  </script>
+
   
-  <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
 
   <title th:text="${title}">base</title>
 </head>
@@ -54,7 +79,7 @@
     </div>
       <div class="option">
         <a href="#" class="item"> <i class="fa-solid fa-house"></i> Home</a>
-        <a href="#" class="item"> <i class="fa-solid fa-id-badge"></i> View Contacts</a>
+        <a href="#" th:href="@{/user/getUserContacts/0}" class="item"> <i class="fa-solid fa-id-badge"></i> View Contacts</a>
         <a href="#" th:href="@{/user/addContact}" class="item"> <i class="fa-solid fa-pen-to-square"></i> Add Contact</a>
         <a href="#" class="item"> <i class="fa-solid fa-user"></i> Your Profile</a>
         <a href="#" class="item"> <i class="fa-solid fa-gear"></i> Settings</a>

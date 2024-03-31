@@ -31,7 +31,7 @@ public class Contact {
     @JoinColumn(name = "user_user_id")
     private User user;
 
-
+    
 
 
    
@@ -59,9 +59,9 @@ public class Contact {
     public String getDescription() {
         return description;
     }
-    // public void setContactId(Long contactId) {
-    //     this.contactId = contactId;
-    // }
+    public void setContactId(Long contactId) {
+        this.contactId = contactId;
+    }
     public void setName(String name) {
         this.name = name;
     }
@@ -96,6 +96,7 @@ public class Contact {
         return "Contact [contactId=" + contactId + ", name=" + name + ", secondName=" + secondName + ", email=" + email
                 + ", work=" + work + ", phone=" + phone + ", image=" + image + ", description=" + description + "]";
     }
+    
 
 
     

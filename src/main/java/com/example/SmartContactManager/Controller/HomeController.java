@@ -77,7 +77,7 @@ public class HomeController {
             }
 
             user.setEnabled(true);
-            user.setRole("ROLE_ADMIN");
+            user.setRole("ROLE_NORMAL");
             user.setImageUrl("defalut.png");
             System.out.println("Agreemnt: " +agreement);
             System.out.println("User: "+ user);
