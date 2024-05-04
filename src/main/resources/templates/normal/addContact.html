@@ -84,17 +84,15 @@
                                     <textarea name="description" id="description" class="form-control" rows="10" th:text="${contact.description}"
                                         placeholder="Enter contact description"></textarea>
                                 </div>
-                                <!-- <div class="form-group mt-3">
-                                    <textarea name="description" id="description" class="form-control" rows="10"
-                                        placeholder="Enter contact description"></textarea>
-                                </div> -->
-
+                                
                                 <!-- Contact Image -->
                                 <div class="imageFile mt-3">
                                     <input type="file" th:text="${contact.image}" id="image-upload" name="profileImage" placeholder="Upload Image">
                                     
                                 </div>
                                 <input type="hidden" th:value="${contact.image}" name="previousImage" />
+
+                                <!-- sending cId only while updating the contact -->
                                 <input  type="hidden" th:value="${contact.contactId}" name="cId">
                                 <!-- Save button  -->
                                 <div class="container text-center">
@@ -107,6 +105,12 @@
                 </div>
             </div>
         </div>
+        <script>
+            $(document).ready(()=>{
+              $(".item1").removeClass("active");
+              $("#add-contact").addClass("active");
+            })
+          </script>
     </section>
 </body>
 

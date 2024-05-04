@@ -33,8 +33,9 @@ public class User {
     private String  name;
 
     @Pattern(regexp ="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$",message="Invalid Email!")
-    @Column(unique = true)
+    @Column(nullable = false,unique = true)
     private String  email;
+
     @Size(min=6,message = "minimum 6 required")
     private String  password;
     private String  role;

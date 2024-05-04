@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" th:replace="~{normal/baseUser::Layout(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <section>
+
+
+        <script> 
+                document.addEventListener('DOMContentLoaded', function() {
+                var alertElement = document.getElementById('profileAlert');
+                setTimeout(function() {
+                    alertElement.style.display = 'none';
+                }, 1000);
+            });
+        </script>
+
+        <h1 class="text-center">Your Profile</h1>
+            <div class=" container-fluid" >
+                        <div class="card">
+                            <div class="user mt-3">
+                                <div th:if="${session.profileStatus}" th:classappend="${session.profileStatus.msgType}" class="alert" role="alert" id="profileAlert">
+                                  <p class="text-center" th:text="${session.profileStatus.content}"></p>
+          
+                                  <th:block th:text="${@sessionHelper.removeSessionAttribute('profileStatus')}"></th:block>
+                                </div>
+                                <!-- <div th:if="${session.profileStatus}" th:classappend="${session.profileStatus.msgType}" class="alert" role="alert" >
+                                    <p th:text="${session.profileStatus.content}"></p>
+                                    <th:block th:text="${@sessionHelper.removeSessionAttribute('profileStatus')}"></th:block>
+                                </div> -->
+                                
+                            <div class="top-container" style="display: flex;">
+                                <div class="left text-center" style="flex: 40%; margin-left: 10px; margin-top: 5px;">
+                                    <img style="height: 210px; width: 210px;" class="my_profile_picture" src="" th:src="@{'/img/'+${user.imageUrl}}" onerror="this.onerror=null; this.src='/img/contact.png';" alt="profile photo">
+                                </div>
+                                <div class="right" style="flex: 60%;">
+            
+            
+                                    <div class="description" style="overflow: auto;  background-color: #d7e2e8;margin: 10px; padding: 10px; height: 300px;">
+                                        <th:block>
+                                            <span><h5 th:text="${user.about}"></h5></span>
+                                        </th:block>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <table class="table text-center">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col"><span th:text="SCMUSER+${user.id}"></span></th>
+                                  </tr>
+                                  <tr>
+                                    <th scope="col">Name</th>
+                                    <th scope="col"><span th:text="${user.name}"></span></th>
+                                  </tr>
+                                  <tr>
+                                    <th scope="col">Email</th>
+                                    <th scope="col"><span th:text="${user.email}"></span></th>
+                                  </tr>
+                                </thead>
+                              </table>
+                              <div class="container text-center" style="margin: 5px; display: flex; justify-content: center;">
+                                <span style="display: flex; gap: 5px;">
+                                    <form action="" th:action="@{'/user/updateUser/'+${user.id}}">
+                                        <button class="btn btn-primary">update</button>
+                                    </form>
+                                    <!-- <button class="btn btn-danger" th:onclick="|onDelete(${user.id})|">delete</button> -->
+                                </span>
+                            </div>
+                        </div>
+                        
+            </div>
+            <script>
+                $(document).ready(()=>{
+                  $(".item1").removeClass("active");
+                  $("#user-profile").addClass("active");
+                })
+              </script>
+    </section>
+</body>
+</html>

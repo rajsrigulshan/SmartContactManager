@@ -1,29 +1,19 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org" th:replace="~{base::Layout(~{::section})}">
-
+<html lang="en" xmlns:th="https://www.thymeleaf.org" th:replace="~{normal/baseUser::Layout(~{::section})}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-
 <body>
-
     <section>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 offset-md-3">
-                    <div class="user mt-3">
-                      <div th:if="${session.message}" th:classappend="${session.message.msgType}" class="alert" role="alert">
-                        <p th:text="${session.message.content}"></p>
-
-                        <th:block th:text="${@sessionHelper.removeSessionAttribute('message')}"></th:block>
-                      </div>
-                      
-                      
-                        <h2 class="text-center">Register here!</h2>
+        <div class=" container-fluid">
+            <div class="card">
+                <div>  
+                        <h2 class="text-center">Edit Profile</h2>
+                        <!-- <h2 class="text-center" th:text="${titleSignup}"></h2> -->
                         
-                        <form novalidate action="" th:action="@{/doRegister}"  method="post" enctype="multipart/form-data"  th:object="${user}">
+                        <form novalidate action="" th:action="@{/user/updateData}"  method="post" enctype="multipart/form-data"  th:object="${user}">
                               <!--  name field -->
 
                             <div class="form-group">
@@ -51,69 +41,47 @@
                                 <label for="email_field" class="form-label">Your Email</label>
                                 <input type="email" 
                                 name="email"
-                                class="form-control" 
+                                class="disabled form-control" 
                                 th:classappend="${#fields.hasErrors('email')?'is-invalid':''}"
                                 id="email_field" 
                                 aria-describedby="userEmail-help"
                                 placeholder="Enter your email"
                                 th:value="${user.email}"
-                                required>
+                                required
+                                disabled>
+                                <input type="hidden" name="email" th:value="${user.email}">
 
                                 <div class="invalid-feedback" th:each="e: ${#fields.errors('email')}" th:text="${e}">
 
                                 </div>
                                
                               </div>
-
-                              <!-- password -->
-                            
-                              <div class="form-group">
-                                <label for="password_field" class="form-label">Your Password</label>
-                                <input type="password" 
-                                name="password"
-                                class="form-control" 
-                                th:classappend="${#fields.hasErrors('password')?'is-invalid':''}"
-                                id="password_field" 
-                                aria-describedby="password-help"
-                                placeholder="Enter your password"
-                                required>
-
-                                <div class="invalid-feedback" th:each="e: ${#fields.errors('password')}" th:text="${e}">
-
-                                </div>
-                               
-                              </div>
-
+                              
                               <!-- about -->
                               <!-- look into the value part -->
                               <div class="form-group">
+                                <label for="email_field" class="form-label">About</label>
                                 <textarea  rows="3" 
                                 name="about"
                                 class="form-control"
                                 th:text="${user.about}"
                                 ></textarea>
 
-                              </div>
+                              
                               <!-- image submission -->
                               <div>
                                 <div class="form-group imageFile mt-3">
-                                  <input type="file" th:text="${user.imageUrl}" id="image-upload" name="userIamge" placeholder="Upload Image">
-                                  
+                                  <input type="file" th:text="${user.imageUrl}" id="image-upload" name="userDispPic" placeholder="Upload Image">   
                               </div>
-                              </div>
+                              <input type="hidden" th:value="${user.imageUrl}" name="previousImage" />
+                              <!-- Id-->
+                              <input  type="hidden" th:value="${user.id}" name="id">
 
-                              <!-- term and condition -->
-                              <div class="form-group form-check ">
-                                <input type="checkbox" 
-                                name="agreement" 
-                                class="form-check-input "
-                                id="agreement">
-                                <label for="agreement">Agree Terms & Condition</label>
-                              </div>
+                             
                               <!-- buttons -->
                              <div class="container text-center">
                                 <button class="btn bg-primary btn-large text-white "  type="submit">Submit</button>
-                                <button class="btn btn-warning btn-large" type="reset">Reset</button>
+                                <!-- <button class="btn btn-warning btn-large" type="reset">Reset</button> -->
                              </div>
 
                         
@@ -124,7 +92,5 @@
             </div>
         </div>
     </section>
-
 </body>
-
 </html>

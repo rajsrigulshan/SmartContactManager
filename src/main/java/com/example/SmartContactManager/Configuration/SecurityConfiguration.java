@@ -46,6 +46,7 @@ public class SecurityConfiguration{
         .anyRequest().permitAll()
         ).formLogin(formLogin->formLogin.loginPage("/signin")
                                         .loginProcessingUrl("/doSignin")
+                                        .defaultSuccessUrl("/user/profile", true)
                                         .permitAll())
                                         .logout(logout->logout.logoutSuccessUrl("/signout"));
                                         

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.SmartContactManager.Entity.User;
+import com.example.SmartContactManager.Helper.ImageHelper;
 import com.example.SmartContactManager.Helper.Message;
 import com.example.SmartContactManager.Repository.UserRepo;
 
@@ -17,6 +18,7 @@ import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 
 
@@ -33,6 +35,8 @@ public class HomeController {
     private UserRepo userRepo;
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    private ImageHelper imageHelper;
     
     @RequestMapping("/")
     public String home(Model model) {
@@ -50,7 +54,6 @@ public class HomeController {
     public String signup(Model model) {
         model.addAttribute("title","signup");
         model.addAttribute("user",new User());
-        
         return "signup";
     }
     
@@ -60,7 +63,7 @@ public class HomeController {
 
     @RequestMapping(value="/doRegister", method=RequestMethod.POST)
     public String registerUser(@Valid @ModelAttribute("user") User user,BindingResult result,@RequestParam(value = "agreement",defaultValue = "false") boolean agreement ,
-                                Model model,HttpSession session) {
+                                Model model,HttpSession session,@RequestParam("userIamge")MultipartFile userIamge) {
 
        
         try {
@@ -78,7 +81,16 @@ public class HomeController {
 
             user.setEnabled(true);
             user.setRole("ROLE_NORMAL");
-            user.setImageUrl("defalut.png");
+            if(userIamge==null){
+                user.setImageUrl("defalut.png");
+            }
+            else{
+                user.setImageUrl(userIamge.getOriginalFilename()+user.getEmail());
+                imageHelper.imageSave(userIamge, user.getEmail());
+
+                
+            }
+
             System.out.println("Agreemnt: " +agreement);
             System.out.println("User: "+ user);
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));

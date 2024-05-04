@@ -9,9 +9,20 @@
     <section>
         
             <div class="container-fluid mt-1">
-                <h1 class="text-center">
-                    All Contacts
-                </h1>
+              <div class="head-box">
+                <div class="container-box">
+                  <div class="item-box">
+                    <h2>All Contacts</h2>
+                  </div>
+                  <div class="item-box" style="display: flex;">
+                    <div class=" item-box1"><input class="form-control" onkeyup="search()" id="search-input" type="search" placeholder="search your contact"></div>
+                    <!-- <div class="item-box2"><button class="btn bg-primary text-white">Search</button></div> -->
+                    <div class="search-result" id="search-result">
+
+                    </div>
+                  </div>
+                </div>
+              </div>
                 <div class="table-responsive card">
                     <table class="table table-hover">
                         <thead>
@@ -35,35 +46,18 @@
                             <td th:text="${c.email}">@mdo</td>
                             <td>
                               <span>
-                                <form   style="display: inline;" method="post" action="" th:action="@{'/user/show-details/' + ${c.contactId}}">
+                                <form   style="display: inline;" action="" th:action="@{'/user/show-details/' + ${c.contactId}}">
                                   <button type="submit" class="btn bg-primary text-white"><i class="fa-regular fa-eye"></i></button>
                                 </form>
                               </span>
                               <span>
-                                <!-- <form style="display: inline;" method="post" action=""  th:action="@{'/user/removeContact/'+${c.contactId}}"  th:onsubmit="onDelete(${c.contactId})">
-                                  <button  type="submit" class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
-                                </form> -->
-
-                                <!-- <form style="display: inline;" method="post" action="" th:action="@{'/user/removeContact/'+${c.contactId}}">
-                                  <button type="button" class="btn btn-danger" th:onclick="|onDelete(${c.contactId}, function(id) { document.location='/user/removeContact/'+id; })|">
-                                      <i class="fa-solid fa-trash"></i>
-                                  </button>
-                              </form> -->
-
-
-                              <!-- <form style="display: inline;" method="post" action="" th:action="@{'/user/removeContact/'+${c.contactId}}">
-                                <button type="submit" class="btn btn-danger" th:onclick="|onDelete(${c.contactId}, function(id) { document.location='/user/removeContact/'+id; })|">
-                                    <i class="fa-solid fa-trash"></i>
-                                </button>
-                            </form> -->
+                                
                             <button class="btn btn-danger" th:onclick="|onDelete(${c.contactId})|"><i class="fa-solid fa-trash"></i></button>
                               </span>  
                             </td>
                           </tr>
                         </tbody>
-                      </table>
-
-                      
+                      </table> 
                 </div>
 
                 
@@ -78,8 +72,6 @@
                     </a>
                   </li>
                   <li th:classappend="${currentPage==i-1} ? 'active':''" th:each="i :${#numbers.sequence(1,totalPage)}" class="page-item"><a class="page-link" th:href="@{'/user/getUserContacts/'+${i-1}}" href="#"><span th:text="${i}"></span></a></li>
-                  <!-- <li class="page-item"><a class="page-link" href="#">2</a></li> -->
-                  <!-- <li class="page-item"><a class="page-link" href="#">3</a></li> -->
                   <li th:classappend="${currentPage+1==totalPage}?'disabled':''" class="page-item">
                     <a class="page-link" th:href="@{'/user/getUserContacts/'+${currentPage+1}}" href="#"  aria-label="Next">
                       <span aria-hidden="true">&raquo;</span>
@@ -89,6 +81,13 @@
                 </ul>
               </nav>
             </div>
+
+            <script>
+              $(document).ready(()=>{
+                $(".item1").removeClass("active");
+                $("#view-contacts").addClass("active");
+              })
+            </script>
     </section>
     
 </body>

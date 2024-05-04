@@ -11,28 +11,26 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.example.SmartContactManager.Entity.Contact;
+
 
 
 @Component
-public class ContactHelper {
+public class ImageHelper {
 
      @Value("${IMAGE_STORAGE_PATH}")
     private String image_url;
 
-    public void imageSave(MultipartFile file,Contact contact){
-
-        contact.setImage(file.getOriginalFilename() + contact.getEmail());
-
-                        try {
-                                File saveFile = new ClassPathResource(image_url).getFile();
-                                Path path = Paths.get(
-                                        saveFile.getAbsolutePath() + File.separator + file.getOriginalFilename()
-                                                + contact.getEmail());
-                                Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+    public void imageSave(MultipartFile file,String uniqueStr){
+        try {
+                File saveFile = new ClassPathResource(image_url).getFile();
+                Path path = Paths.get(
+                        saveFile.getAbsolutePath() + File.separator + file.getOriginalFilename()
+                                +uniqueStr);
+                Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+        } catch (Exception e) {
+            System.out.println("ERROR: Image not saved");
+            e.printStackTrace();
+        }
        
     }
     public void imageDelete(String imageName){
@@ -44,6 +42,7 @@ public class ContactHelper {
         
             Files.delete(path);
         } catch (Exception e) {
+            System.out.println("ERROR: Image not Deleted");
                 e.printStackTrace();
         }
         
