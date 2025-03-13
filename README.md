@@ -19,6 +19,6 @@ This project implements a comprehensive contact management system, enabling user
     * Java
 * **Frontend:**
     * React
-    * JavaScript (ES6+)
+    * TypeScript
 * **Database:**
     * PostgreSQL
