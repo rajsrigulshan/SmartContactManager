@@ -1,8 +1,9 @@
+
 function App() {
   return (
     <>
      
-      <h1 color="white">hello vite </h1>
+      <h1 className='text-red'>hello vite </h1>
     </>
   )
 }
