@@ -1,54 +1,87 @@
-# React + TypeScript + Vite
+src/
+├── components/
+│   ├── common/             # Reusable UI components
+│   │   ├── Button/
+│   │   │   ├── Button.jsx
+│   │   │   ├── Button.module.css
+│   │   ├── Input/
+│   │   │   ├── Input.jsx
+│   │   │   ├── Input.module.css
+│   │   ├── LoadingSpinner/
+│   │   │   ├── LoadingSpinner.jsx
+│   │   │   ├── LoadingSpinner.module.css
+│   │   └── ...
+│   ├── navbar/
+│   │   ├── NavbarComponent.jsx
+│   │   ├── NavbarComponent.module.css
+│   ├── ...
+├── pages/
+│   ├── Home/
+│   │   ├── Home.jsx
+│   │   ├── Home.module.css
+│   ├── Login/
+│   │   ├── Login.jsx
+│   │   ├── Login.module.css
+│   ├── Signup/
+│   │   ├── Signup.jsx
+│   │   ├── Signup.module.css
+│   ├── About/
+│   │   ├── About.jsx
+│   │   ├── About.module.css
+│   ├── Services/
+│   │   ├── Services.jsx
+│   │   ├── Services.module.css
+│   ├── Pricing/
+│   │   ├── Pricing.jsx
+│   │   ├── Pricing.module.css
+│   ├── Contact/
+│   │   ├── Contact.jsx
+│   │   ├── Contact.module.css
+│   ├── ...
+├── services/              # API calls and data fetching
+│   ├── api.js
+│   ├── auth.js
+│   ├── ...
+├── utils/                 # Helper functions and utilities
+│   ├── helpers.js
+│   ├── constants.js
+│   ├── validation.js
+│   ├── ...
+├── context/               # React Context for state management
+│   ├── AuthContext.js
+│   ├── ThemeContext.js
+│   ├── ...
+├── hooks/                 # Custom React hooks
+│   ├── useAuth.js
+│   ├── useTheme.js
+│   ├── useForm.js
+│   ├── ...
+├── assets/                # Static assets (images, fonts, etc.)
+│   ├── images/
+│   │   ├── logo.svg
+│   │   ├── ...
+│   ├── fonts/
+│   ├── ...
+├── App.jsx                # Main application component
+├── index.jsx              # Entry point of the application
+├── index.css              # Global styles
+├── App.module.css        # App component styles
+├── reportWebVitals.js     # Web vitals reporting
+├── setupTests.js          # Test setup
+├── .env.development      # Development environment variables
+├── .env.production       # Production environment variables
+├── package.json
+├── package-lock.json
+├── README.md
+├── .gitignore
+└── public/
+    ├── index.html
+    ├── favicon.ico
+    └── ...
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
+-------------------------------
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+check for the page overflowing.......

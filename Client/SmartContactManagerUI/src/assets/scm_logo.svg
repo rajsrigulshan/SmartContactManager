@@ -1,0 +1,18 @@
+<svg width="200" height="100" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .letter {
+      font-family: sans-serif;
+      font-weight: bold;
+      font-size: 40px;
+      fill:rgb(255, 255, 255);
+    }
+  </style>
+
+  <g transform="translate(100, 50)">
+    <circle r="50" fill="rgb(46, 163, 237)" />
+    <text x="-60" y="18" class="letter">S</text>
+    <text x="-15" y="25" class="letter">C</text>
+    <text x="32" y="18" class="letter">M</text>
+  </g>
+
+</svg>

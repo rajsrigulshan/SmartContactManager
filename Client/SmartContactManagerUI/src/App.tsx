@@ -1,10 +1,22 @@
 
+import NavbarComponent from "./components/navbar/NavbarComponent.tsx";
+import AppRouter from "./routers/appRouter/AppRouter.tsx";
+import { BrowserRouter as Router } from "react-router-dom";
+import useLoadTheme from "./hooks/useLoadTheme.ts";
+
+
 function App() {
+  useLoadTheme();
   return (
-    <>
-     
-      <h1 className='text-red'>hello vite </h1>
-    </>
+  <Router>
+   <div className="SCM_2.0  dark:text-white dark:bg-gray-700 ">
+    <header className="SCM_header">
+      <NavbarComponent/>
+    </header>
+    <AppRouter/>
+  </div>
+  </Router>
+
   )
 }
 
