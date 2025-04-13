@@ -10,7 +10,7 @@ function AppRouter(){
         <Routes>
             <Route path='/' element={<SCMHome/>}/>
             <Route path='/about' element={<SCMAbout/>}/>
-            <Route path='/login' element={<LoginForm/>}/>
+            <Route path='/signin' element={<LoginForm/>}/>
             <Route path='/signup' element={<Signup/>}/>
         </Routes>
     );

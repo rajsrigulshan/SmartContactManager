@@ -6,11 +6,11 @@
 
 /* Prevent #root from scrolling if body overflows slightly */
 
-#root {
+/* #root {
     height: 100vh;
     width: 100vw;
     overflow: hidden; 
-}
+} */
 
 
 

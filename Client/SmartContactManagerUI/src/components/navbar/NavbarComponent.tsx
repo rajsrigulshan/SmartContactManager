@@ -19,8 +19,8 @@ function NavbarComponent(){
        <div className="flex justify-center items-center mr-2">
        {mode === 'dark' ? <SunIcon onClick={toggleTheme} className="h-5 w-5" /> : <MoonIcon onClick={toggleTheme} className="h-5 w-5" />}
        </div>
-        <Link to="/login"><Button className="mr-1">Login</Button></Link>
-        <Link to="/signup"><Button className="mr-2">Signup</Button></Link>
+        <Link to="/signin"><Button className="mr-1" style={{userSelect:'none'}}>Signin</Button></Link>
+        <Link to="/signup"><Button className="mr-2" style={{userSelect:'none'}}>Signup</Button></Link>
         <NavbarToggle />
       </div>
       <NavbarCollapse>
