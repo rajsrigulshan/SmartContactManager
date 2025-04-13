@@ -4,20 +4,20 @@ import { Link } from "react-router-dom";
 
 function LoginForm() {
     return (
-        <div className="flex justify-center items-center mt-40 overflow-auto">
+        <div className="flex justify-center items-center mt-2 overflow-auto">
             
-            <Card className="max-w-sm">
+            <Card className="max-w-xl">
                 <h1 className="text-center font-bold text-2xl">Sign in</h1>
                 <form className="flex flex-col gap-4">
                     <div>
                         <div className="mb-2 block">
-                            <Label htmlFor="email1">Your email</Label>
+                            <Label htmlFor="email1">Email</Label>
                         </div>
-                        <TextInput id="email1" type="email" placeholder="Enter your email id" required size={70} />
+                        <TextInput id="email1" type="email" placeholder="yourmailid@scm.com" required size={80} />
                     </div>
                     <div>
                         <div className="mb-2 block">
-                            <Label htmlFor="password1">Your password</Label>
+                            <Label htmlFor="password1">Password</Label>
                         </div>
                         <TextInput id="password1" type="password" required />
                     </div>
