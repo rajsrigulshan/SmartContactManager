@@ -1,4 +1,4 @@
-package com.smartcontactmanager.smartContactManagerServer.entity;
+package com.smartcontactmanager.smartContactManagerServer.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
