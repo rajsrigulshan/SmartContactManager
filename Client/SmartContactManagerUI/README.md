@@ -77,7 +77,7 @@ src/
 └── public/
     ├── index.html
     ├── favicon.ico
-    └── ...
+    └── ..
 
 
 
