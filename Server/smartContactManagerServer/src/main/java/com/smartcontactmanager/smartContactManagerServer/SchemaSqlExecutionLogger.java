@@ -13,6 +13,10 @@
 // import org.springframework.stereotype.Component;
 
 
+//@Raj: This class is created to check the creation of tables from "schema.sql" file. 
+
+
+
 // @Component
 // public class SchemaSqlExecutionLogger implements CommandLineRunner {
 //     private static final Logger logger = LoggerFactory.getLogger(SchemaSqlExecutionLogger.class);
