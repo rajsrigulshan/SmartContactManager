@@ -12,3 +12,11 @@ export interface signupResponse{
     message:string,
     error ?:string
 }
+
+export interface formErrortype{
+    name?:string;
+    email?:string;
+    phoneNumber?:string
+    password?:string;
+    rePassword?:string;
+}
