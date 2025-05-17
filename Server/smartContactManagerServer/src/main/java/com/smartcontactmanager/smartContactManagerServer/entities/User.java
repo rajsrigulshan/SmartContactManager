@@ -3,6 +3,8 @@ package com.smartcontactmanager.smartContactManagerServer.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.boot.convert.DataSizeUnit;
+
 import com.smartcontactmanager.smartContactManagerServer.enums.Providers;
 
 import jakarta.persistence.CascadeType;
@@ -23,11 +25,13 @@ public class User {
     private String name;
     @Column(nullable = false,unique = true)
     private String email;
+    @Column(nullable = false)
     private String password;
     @Column(length = 1000)
     private String description;
     @Column(length = 1000)
     private String profileLink;
+    @Column(nullable = false)
     private String phoneNumber;
     private String isEnabled;
     private String isEmailVerified;
