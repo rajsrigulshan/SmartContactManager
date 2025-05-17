@@ -105,7 +105,7 @@ function Signup() {
             }
             else {
                 setMessage(result.message || 'Signup failed.');
-                console.log('Signup eror: ', result.message);
+                console.log('Signup error: ', result.message);
 
             }
         }
