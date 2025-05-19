@@ -6,7 +6,7 @@ import com.smartcontactmanager.smartContactManagerServer.entities.User;
 
 
 @Service
-public interface UserService {
+public interface HomeService {
     public User registerUser(User user);
 
 

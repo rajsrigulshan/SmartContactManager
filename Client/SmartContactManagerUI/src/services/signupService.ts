@@ -5,7 +5,7 @@ import axios, { AxiosResponse } from "axios";
 
 export async function userSignup(userData: formDataType): Promise<signupResponse> {
     try {
-        const response: AxiosResponse = await axios.post('http://127.0.0.1:8081/user/signup', userData,{
+        const response: AxiosResponse = await axios.post('http://127.0.0.1:8081/signup', userData,{
             validateStatus: (status)=>{
                 return (status>=200 && status<300) || (status>=400 && status<=410)
             }

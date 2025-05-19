@@ -3,8 +3,6 @@ package com.smartcontactmanager.smartContactManagerServer.entities;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.boot.convert.DataSizeUnit;
-
 import com.smartcontactmanager.smartContactManagerServer.enums.Providers;
 
 import jakarta.persistence.CascadeType;
