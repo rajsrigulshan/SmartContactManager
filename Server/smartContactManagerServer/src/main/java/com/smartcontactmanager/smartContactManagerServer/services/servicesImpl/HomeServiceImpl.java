@@ -9,10 +9,10 @@ import com.smartcontactmanager.smartContactManagerServer.entities.User;
 import com.smartcontactmanager.smartContactManagerServer.exceptions.DuplicateUserException;
 import com.smartcontactmanager.smartContactManagerServer.helper.UserHelper;
 import com.smartcontactmanager.smartContactManagerServer.repository.UserRepo;
-import com.smartcontactmanager.smartContactManagerServer.services.UserService;
+import com.smartcontactmanager.smartContactManagerServer.services.HomeService;
 
 @Component
-public class UserServiceImpl implements UserService{
+public class HomeServiceImpl implements HomeService{
      @Autowired
     private UserHelper userHelper;
     @Autowired
@@ -21,12 +21,8 @@ public class UserServiceImpl implements UserService{
 
     public User registerUser(User user){
     try {
-        System.out.println("I am in for signup....");
-        boolean val=userHelper.isvalidEmail(user.getEmail());
-        if(userHelper.isvalidEmail(user.getEmail()) && val){
-            System.out.println("validating Email........");
+        if(userHelper.isvalidEmail(user.getEmail())){
           if(!userRepo.findByEmail(user.getEmail()).isEmpty()){
-                System.out.println("User Already exists");
                 throw new DuplicateUserException();
           }
         }
@@ -37,7 +33,6 @@ public class UserServiceImpl implements UserService{
           User newUser=userRepo.save(user);
           return newUser;
       }catch(DuplicateUserException dUser){
-            System.out.println("User already exists."); 
             throw new DuplicateUserException();
       }
        catch (Exception e) {
