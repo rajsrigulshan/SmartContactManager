@@ -3,6 +3,10 @@ package com.smartcontactmanager.smartContactManagerServer.services.servicesImpl;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.smartcontactmanager.smartContactManagerServer.entities.User;
@@ -17,12 +21,16 @@ public class HomeServiceImpl implements HomeService{
     private UserHelper userHelper;
     @Autowired
     private UserRepo userRepo;
+    @Autowired
+    private AuthenticationManager authManager;
+      ;
 
 
     public User registerUser(User user){
     try {
         if(userHelper.isvalidEmail(user.getEmail())){
-          if(!userRepo.findByEmail(user.getEmail()).isEmpty()){
+          User user2=userRepo.findByEmail(user.getEmail());
+          if(user2!=null){
                 throw new DuplicateUserException();
           }
         }
@@ -30,6 +38,7 @@ public class HomeServiceImpl implements HomeService{
             return null;
           }
           user.setUserId(UUID.randomUUID().toString());
+          user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
           User newUser=userRepo.save(user);
           return newUser;
       }catch(DuplicateUserException dUser){
@@ -39,6 +48,16 @@ public class HomeServiceImpl implements HomeService{
         System.out.println("ERROR: "+e.getMessage());
         return null;
       }
+    }
+
+
+    @Override
+    public String doLogin(User user) {
+      Authentication authentication=  authManager.authenticate(new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
+      if(authentication.isAuthenticated()){
+        return "success";
+      }
+        return "failed";
     }
     
 
