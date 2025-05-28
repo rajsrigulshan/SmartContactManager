@@ -14,6 +14,7 @@ import com.smartcontactmanager.smartContactManagerServer.exceptions.DuplicateUse
 import com.smartcontactmanager.smartContactManagerServer.helper.UserHelper;
 import com.smartcontactmanager.smartContactManagerServer.repository.UserRepo;
 import com.smartcontactmanager.smartContactManagerServer.services.HomeService;
+import com.smartcontactmanager.smartContactManagerServer.services.JwtService;
 
 @Component
 public class HomeServiceImpl implements HomeService{
@@ -23,9 +24,10 @@ public class HomeServiceImpl implements HomeService{
     private UserRepo userRepo;
     @Autowired
     private AuthenticationManager authManager;
-      ;
-
-
+    @Autowired(required = false)
+    private JwtService jwtService;
+    
+    @Override
     public User registerUser(User user){
     try {
         if(userHelper.isvalidEmail(user.getEmail())){
@@ -55,7 +57,7 @@ public class HomeServiceImpl implements HomeService{
     public String doLogin(User user) {
       Authentication authentication=  authManager.authenticate(new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
       if(authentication.isAuthenticated()){
-        return "success";
+        return jwtService.generateToken(user.getEmail());
       }
         return "failed";
     }
