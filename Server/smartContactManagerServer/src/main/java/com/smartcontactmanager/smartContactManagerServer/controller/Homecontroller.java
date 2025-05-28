@@ -69,7 +69,7 @@ public class Homecontroller {
 
     }
 
-
+    //@raj: check for the necessacity of the user object or we can create loginObject. 
     @PostMapping("/login")
     public ResponseEntity<ApiResponse<String>> userLogin(@RequestBody User user){
             System.out.println("Login triggered....");
