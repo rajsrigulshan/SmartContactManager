@@ -14,6 +14,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 
 @Configuration
@@ -21,6 +22,8 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SpringSecurityConfigs{
     @Autowired
     private UserDetailsService userDetailsService;
+    @Autowired
+    private JwtFilterConfig jwtFilter;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
@@ -33,7 +36,8 @@ public class SpringSecurityConfigs{
                                         .authenticated())
             // .formLogin(Customizer.withDefaults()) // browser login 
             .httpBasic(Customizer.withDefaults()) // API request through postman
-            .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));                                               
+            .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .addFilterBefore(jwtFilter,UsernamePasswordAuthenticationFilter.class);                                              
         return http.build();
     }
 

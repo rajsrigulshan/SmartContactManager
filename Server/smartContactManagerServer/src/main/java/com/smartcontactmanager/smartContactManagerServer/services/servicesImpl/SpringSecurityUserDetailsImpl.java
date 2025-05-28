@@ -1,4 +1,4 @@
-package com.smartcontactmanager.smartContactManagerServer.configs;
+package com.smartcontactmanager.smartContactManagerServer.services.servicesImpl;
 
 import java.util.Collection;
 
@@ -16,7 +16,7 @@ public class SpringSecurityUserDetailsImpl implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // roles we will set later....
+        // roles I will add later....
         return null;
     }
 
