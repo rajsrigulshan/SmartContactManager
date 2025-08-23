@@ -1,5 +1,4 @@
-
-import { Alert, Button, Card, Label, Spinner, TextInput } from "flowbite-react";
+import {Button, Card, Label, Spinner, TextInput } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { userLogin } from "../services/authService/loginService";
@@ -7,11 +6,12 @@ import {useForm } from "react-hook-form";
 import { loginSchema, LoginSchemaType } from "../schema/loginSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormStatus } from "../common/types";
+import FlashMessage from "./FlashMessage";
 
 function LoginForm() {
 
     const [loading, setLoading] = useState<boolean>(false);
-    const [formStatus, setFormStatus] = useState<FormStatus>({ type: null, message: "" });
+    const [loginStatus, setLoginStatus] = useState<FormStatus>({ type: null, message: "" });
     const navigate = useNavigate();
     const { register, handleSubmit, formState: { errors } } = useForm<LoginSchemaType>({
         defaultValues: {
@@ -25,38 +25,34 @@ function LoginForm() {
 
 
     useEffect(() => {
-        if (formStatus.message) {
+        if (loginStatus.message) {
             const timer = setTimeout(() => {
-                setFormStatus({ type: null, message: "" });
+                setLoginStatus({ type: null, message: "" });
             }, 1000);
             return () => clearTimeout(timer);
         }
-    }, [formStatus.message]);
+    }, [loginStatus.message]);
 
 
 
     const login = async (data: LoginSchemaType) => {
-        // console.log("data: ", data);
         setLoading(true);
-        setFormStatus({ type: null, message: "" });
+        setLoginStatus({ type: null, message: "" });
 
         try {
             const result = await userLogin(data);
-        setLoading(false);
         if (!result.isError) {
-            setFormStatus({ type: "success", message: result.message || "Login Successful!" });
+            setLoginStatus({ type: "success", message: result.message || "Login Successful!" });
             setTimeout(() => {
                 navigate('/user/users');
             }, 200);
         }
         else {
-            setFormStatus({ type: "error", message: result.message || "Login failed. " });
-            // console.log('Signup error: ', result.message);
-
+            setLoginStatus({ type: "error", message: result.message || "Login failed!" });
         }
             
         } catch (error) {
-            setFormStatus({type:"error",message:"Unexpecte error occured!"})
+            setLoginStatus({type:"error",message:"Unexpecte error occured!"})
         }
         finally{
              setLoading(false);
@@ -66,15 +62,7 @@ function LoginForm() {
 
     return (
         <div className="flex justify-center items-center mt-2 overflow-auto">
-            {formStatus.type && (
-
-                // make it component AND LOAD it...
-                <div className="absolute top-20 right-4 z-50">
-                    <Alert className={`${formStatus.type === "error" ? 'bg-red-500 text-white  dark:bg-red-500 dark:text-white text-xl' : 'text-xl'}`}>
-                        <span className="font-bold">{formStatus.type === "error" ? 'Error!' : 'Success!'}</span> {formStatus.message}
-                    </Alert>
-                </div>
-            )}
+            {loginStatus.type && <FlashMessage loginStatus={loginStatus} />}
             <Card className="max-w-xl">
                 <h1 className="text-center font-bold text-2xl">Sign in</h1>
                 <form onSubmit={handleSubmit(login)} className="flex flex-col gap-4" noValidate>
