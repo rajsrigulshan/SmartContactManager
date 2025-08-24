@@ -13,10 +13,18 @@ export interface signupResponse{
     error ?:string
 }
 
-export interface formErrortype{
+export interface SignupFormErrortype{
     name?:string;
     email?:string;
     phoneNumber?:string
     password?:string;
     rePassword?:string;
+}
+export interface LoginFormErrorType{
+    email ?:string
+}
+export interface LoginResponse{
+    isError:boolean,
+    message:string,
+    error ?:string
 }
