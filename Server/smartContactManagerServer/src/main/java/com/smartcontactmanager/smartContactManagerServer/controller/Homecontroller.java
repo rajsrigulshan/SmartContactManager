@@ -1,6 +1,5 @@
 package com.smartcontactmanager.smartContactManagerServer.controller;
 
-import java.net.http.HttpRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

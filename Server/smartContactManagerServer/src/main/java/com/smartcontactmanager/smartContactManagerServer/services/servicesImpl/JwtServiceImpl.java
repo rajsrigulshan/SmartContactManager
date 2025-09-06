@@ -22,22 +22,7 @@ import io.jsonwebtoken.security.Keys;
 public class JwtServiceImpl implements JwtService {
   private final String secretKey1="m4privatat35trigf0r5ignaturehbihdffuakfhdjoiaijfdofj";
 
-
-  // Generatng secretKey with keyGenerator
-
-  // private  String signatureKey="";
-  // public JwtServiceImpl(){
-  //   try {
-  //     KeyGenerator keyGenerator=KeyGenerator.getInstance("HmacSHA256");
-  //     SecretKey sk=keyGenerator.generateKey();
-  //     signatureKey=Base64.getEncoder().encodeToString(sk.getEncoded());
-  //     System.out.println("SignatureKey: "+signatureKey);
-  //   } catch (NoSuchAlgorithmException e) {
-  //         throw new RuntimeException(e);
-  //   }
-  // }
-
-
+  
     @Override
     public String generateToken(String username) {
       Map<String,Object> claims=new HashMap<>();
