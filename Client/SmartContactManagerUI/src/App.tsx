@@ -3,7 +3,6 @@ import AppRouter from "./routers/appRouter/AppRouter.tsx";
 import { BrowserRouter as Router } from "react-router-dom";
 import useLoadTheme from "./hooks/useLoadTheme.ts";
 
-
 function App() {
   useLoadTheme();
   return (

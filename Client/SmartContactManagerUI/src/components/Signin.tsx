@@ -7,12 +7,16 @@ import { loginSchema, LoginSchemaType } from "../schema/loginSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormStatus } from "../common/types";
 import FlashMessage from "./FlashMessage";
+import { useDispatch } from "react-redux";
+import { login  as authLogin} from "../store/authSlice";
+
 
 function LoginForm() {
 
     const [loading, setLoading] = useState<boolean>(false);
     const [loginStatus, setLoginStatus] = useState<FormStatus>({ type: null, message: "" });
     const navigate = useNavigate();
+    const dispatch=useDispatch();
     const { register, handleSubmit, formState: { errors } } = useForm<LoginSchemaType>({
         defaultValues: {
             email: "",
@@ -43,6 +47,7 @@ function LoginForm() {
             const result = await userLogin(data);
         if (!result.isError) {
             setLoginStatus({ type: "success", message: result.message || "Login Successful!" });
+            dispatch(authLogin(data.email))
             setTimeout(() => {
                 navigate('/user/users');
             }, 200);
@@ -62,7 +67,7 @@ function LoginForm() {
 
     return (
         <div className="flex justify-center items-center mt-2 overflow-auto">
-            {loginStatus.type && <FlashMessage loginStatus={loginStatus} />}
+            {loginStatus.type && <FlashMessage flashMsgProp={loginStatus} />}
             <Card className="max-w-xl">
                 <h1 className="text-center font-bold text-2xl">Sign in</h1>
                 <form onSubmit={handleSubmit(login)} className="flex flex-col gap-4" noValidate>

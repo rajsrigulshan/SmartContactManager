@@ -6,6 +6,7 @@ import { signupSchema, signupSchemaType } from "../schema/signupSchema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormStatus } from "../common/types";
+import FlashMessage from "./FlashMessage";
 
 
 function Signup() {
@@ -63,13 +64,8 @@ function Signup() {
 
     return (
         <div className="flex justify-center relative">
-            {signupStatus.type && (
-                <div className="absolute top-4 right-4 z-50">
-                    <Alert className={`${signupStatus.type === "error" ? 'bg-red-500 text-white  dark:bg-red-500 dark:text-white text-xl' : 'text-xl'}`}>
-                        <span className="font-bold">{signupStatus.type === "error" ? 'Error!' : 'Success!'}</span> {signupStatus.message}
-                    </Alert>
-                </div>
-            )}
+            {signupStatus.type &&  <FlashMessage flashMsgProp={signupStatus}/>
+            }
             <div className="flex justify-center items-center mt-2 overflow-auto">
                 <Card className="max-w-xl">
                     <div className="p-0 gap-0 flex flex-col">

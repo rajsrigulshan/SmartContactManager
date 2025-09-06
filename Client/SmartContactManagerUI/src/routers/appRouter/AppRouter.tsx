@@ -2,8 +2,8 @@ import {Routes,Route} from 'react-router-dom';
 
 import SCMHome from '../../pages/home/SCMHome.tsx';
 import SCMAbout from '../../pages/about/SCMAbout';
-import LoginForm from '../../auth/signin/Signin.tsx';
-import Signup from '../../auth/signup/Signup.tsx';
+import LoginForm from '../../components/Signin.tsx';
+import Signup from '../../components/Signup.tsx';
 
 function AppRouter(){
     return(
