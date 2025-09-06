@@ -1,4 +1,4 @@
-import { formDataType, signupResponse } from "../common/interfaces";
+import { formDataType, signupResponse } from "../../common/interfaces";
 import axios, { AxiosResponse } from "axios";
 
 
