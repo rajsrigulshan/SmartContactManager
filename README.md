@@ -1,4 +1,5 @@
-#SmartContactManager 2.0 (in progress, I will update shortly.😃)
+
+# SmartContactManager 2.0 (in progress, I will update shortly.😃)
 
 **SmartContactManager 2.0** is a modern contact management application built with a robust REST API architecture, leveraging the power of Spring Boot for the backend and React for a dynamic, user-friendly frontend.
 
@@ -19,6 +20,6 @@ This project implements a comprehensive contact management system, enabling user
     * Java
 * **Frontend:**
     * React
-    * JavaScript (ES6+)
+    * TypeScript
 * **Database:**
     * PostgreSQL
