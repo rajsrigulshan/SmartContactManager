@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.smartcontactmanager.smartContactManagerServer.dto.UserLoginResponseDTO;
 import com.smartcontactmanager.smartContactManagerServer.entities.User;
 import com.smartcontactmanager.smartContactManagerServer.exceptions.DuplicateUserException;
 import com.smartcontactmanager.smartContactManagerServer.helper.ApiResponse;
@@ -70,17 +71,17 @@ public class Homecontroller {
 
     //@raj: check for the necessacity of the user object or we can create loginObject. 
     @PostMapping("/login")
-    public ResponseEntity<ApiResponse<String>> userLogin(@RequestBody User user){
+    public ResponseEntity<ApiResponse<UserLoginResponseDTO>> userLogin(@RequestBody User user){
             System.out.println("Login triggered....");
-            String token=homeService.doLogin(user);
-            if(token!=null){
-                return new ResponseEntity<>(ApiResponse.<String>builder()
+            UserLoginResponseDTO userLoginResponseDTO=homeService.doLogin(user);
+            if(userLoginResponseDTO!=null){
+                return new ResponseEntity<>(ApiResponse.<UserLoginResponseDTO>builder()
                                                              .success(true)
                                                              .message("validated")
-                                                             .data(token)
+                                                             .data(userLoginResponseDTO)
                                                              .build(),HttpStatus.valueOf(200));
             }
-           return new ResponseEntity<>(ApiResponse.<String>builder()
+           return new ResponseEntity<>(ApiResponse.<UserLoginResponseDTO>builder()
                         .success(false)
                         .message("Invalid User")
                         .build(), HttpStatus.valueOf(500));

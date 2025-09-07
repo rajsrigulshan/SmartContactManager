@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import com.smartcontactmanager.smartContactManagerServer.dto.UserLoginResponseDTO;
 import com.smartcontactmanager.smartContactManagerServer.entities.User;
 import com.smartcontactmanager.smartContactManagerServer.exceptions.DuplicateUserException;
 import com.smartcontactmanager.smartContactManagerServer.helper.UserHelper;
@@ -54,12 +56,20 @@ public class HomeServiceImpl implements HomeService{
 
 
     @Override
-    public String doLogin(User user) {
+    public UserLoginResponseDTO doLogin(User user) {
       Authentication authentication=  authManager.authenticate(new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
-      if(authentication.isAuthenticated()){
-        return jwtService.generateToken(user.getEmail());
+      if(authentication!=null && authentication.isAuthenticated()){
+        System.out.println("details:"+authentication.getPrincipal()+"-----"+authentication.getName());
+         String token= jwtService.generateToken(user.getEmail());
+        //  SpringSecurityUserDetailsImpl userDetails=(SpringSecurityUserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        SpringSecurityUserDetailsImpl userDetails=(SpringSecurityUserDetailsImpl)authentication.getPrincipal();
+         UserLoginResponseDTO userLoginResponseDTO=new UserLoginResponseDTO();
+         userLoginResponseDTO.setToken(token);
+         userLoginResponseDTO.setUserName(userDetails.getUsername());
+         userLoginResponseDTO.setName(userDetails.getName());
+         return userLoginResponseDTO;
       }
-        return "failed";
+        return null;
     }
     
 

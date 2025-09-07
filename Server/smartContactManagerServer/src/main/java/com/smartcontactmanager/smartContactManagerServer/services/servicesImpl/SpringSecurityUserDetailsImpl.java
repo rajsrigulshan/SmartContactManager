@@ -13,7 +13,10 @@ public class SpringSecurityUserDetailsImpl implements UserDetails {
     public SpringSecurityUserDetailsImpl(User user){
         this.user=user;
     }
-
+   
+    public String getName(){
+        return user.getName();
+    }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         // roles I will add later....
@@ -30,5 +33,10 @@ public class SpringSecurityUserDetailsImpl implements UserDetails {
     public String getUsername() {
         return user.getEmail();
         
-    } 
+    }  
+
+     @Override
+    public String toString() {
+        return "SpringSecurityUserDetailsImpl [user=" + user + "]";
+    }
 }
