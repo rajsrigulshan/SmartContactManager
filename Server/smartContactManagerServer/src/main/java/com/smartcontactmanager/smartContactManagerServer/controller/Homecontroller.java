@@ -84,7 +84,7 @@ public class Homecontroller {
            return new ResponseEntity<>(ApiResponse.<UserLoginResponseDTO>builder()
                         .success(false)
                         .message("Invalid User")
-                        .build(), HttpStatus.valueOf(500));
+                        .build(), HttpStatus.valueOf(401));
             
                                                          
     }
