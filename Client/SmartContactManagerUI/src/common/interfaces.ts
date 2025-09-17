@@ -23,8 +23,15 @@ export interface SignupFormErrortype{
 export interface LoginFormErrorType{
     email ?:string
 }
-export interface LoginResponse{
-    isError:boolean,
+export interface UserLoginResponseDTO{
+    name:string,
+    userName:string,
+    token:string
+}
+
+export interface ApiResponse<T>{
+    success:boolean,
     message:string,
-    error ?:string
+    data:T,
+    error?:string
 }
