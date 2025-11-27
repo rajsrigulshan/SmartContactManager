@@ -17,6 +17,11 @@ public class SpringSecurityUserDetailsImpl implements UserDetails {
     public String getName(){
         return user.getName();
     }
+
+     public String getUserId(){
+        return user.getUserId();
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         // roles I will add later....

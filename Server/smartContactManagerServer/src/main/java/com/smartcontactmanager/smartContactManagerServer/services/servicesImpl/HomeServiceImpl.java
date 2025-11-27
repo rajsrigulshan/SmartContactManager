@@ -64,6 +64,7 @@ public class HomeServiceImpl implements HomeService{
          userLoginResponseDTO.setToken(token);
          userLoginResponseDTO.setUserName(userDetails.getUsername());
          userLoginResponseDTO.setName(userDetails.getName());
+         userLoginResponseDTO.setUserId(userDetails.getUserId());
          return userLoginResponseDTO;
       }
         return null;

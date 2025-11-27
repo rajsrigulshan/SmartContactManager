@@ -2,6 +2,7 @@ package com.smartcontactmanager.smartContactManagerServer.dto;
 
 
 public class UserLoginResponseDTO {
+    private String userId;
     private String userName;
     private String name;
     private String token;
@@ -9,6 +10,14 @@ public class UserLoginResponseDTO {
     
 
     public UserLoginResponseDTO() {
+    }
+    
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getUserName() {
@@ -30,6 +39,5 @@ public class UserLoginResponseDTO {
 
     public void setName(String name) {
         this.name = name;
-    }
-    
+    }    
 }

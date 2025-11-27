@@ -1,7 +1,8 @@
 import {Button, Card, Label, Spinner, TextInput } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { userLogin } from "../services/authService/loginService";
+// import { userLogin } from "../services/authService/loginService";
+import authService from "../services/authService";
 import {useForm } from "react-hook-form";
 import { loginSchema, LoginSchemaType } from "../schema/loginSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -44,12 +45,20 @@ function LoginForm() {
         setLoginStatus({ type: null, message: "" });
 
         try {
-            const result = await userLogin(data);
-        if (!result.isError) {
+            const result = await authService.login(data);
+        if (result.success) {
+            let reduxData:{name:string,id:string};
+            reduxData={
+                id:result.data.userId,
+                name:result.data.name
+                
+
+            }
             setLoginStatus({ type: "success", message: result.message || "Login Successful!" });
-            dispatch(authLogin(data.email))
+            
+            dispatch(authLogin(reduxData))
             setTimeout(() => {
-                navigate('/user/users');
+                navigate('/user');
             }, 200);
         }
         else {

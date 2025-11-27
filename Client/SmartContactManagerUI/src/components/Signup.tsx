@@ -49,7 +49,7 @@ function Signup() {
                 reset();
                 setSignupStatus({ type: "success", message: result.message || "Signup Successful!" });
                 setTimeout(() => {
-                    navigate('/signin');
+                    navigate('/login');
                 }, 200);
             }
             else {
