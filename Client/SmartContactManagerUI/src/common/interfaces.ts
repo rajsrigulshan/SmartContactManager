@@ -24,6 +24,7 @@ export interface LoginFormErrorType{
     email ?:string
 }
 export interface UserLoginResponseDTO{
+    userId:string,
     name:string,
     userName:string,
     token:string
@@ -32,6 +33,5 @@ export interface UserLoginResponseDTO{
 export interface ApiResponse<T>{
     success:boolean,
     message:string,
-    data:T,
-    error?:string
+    data:T
 }
